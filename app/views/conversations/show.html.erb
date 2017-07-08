@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Conversation with user: <%= @conversation.opposed_user(current_user).email %></h1>
+      <ul id="messages" style="list-style: none;">
+        <% @conversation.messages.each do |message| %>
+          <li>
+            <div class="alert alert-info" role="alert">
+              <b><%= @conversation.sender.email %></b>: <%= message.body %>
+            </div>
+          </li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= render partial: 'messages/message_form', locals: {message: @message, conversation: @conversation}%>
+    </div>
+  </div>
+</div>

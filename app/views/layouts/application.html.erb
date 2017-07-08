@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= action_cable_meta_tag %>
   </head>
 
   <body>
@@ -16,10 +17,11 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="/">Home</a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
+              <% if user_signed_in? %>
                 <li class="nav-item active">
                   Hello, <%= current_user.email %>
                 </li>
@@ -27,8 +29,9 @@
                   <%= link_to 'Chat', chat_index_path %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to 'Logout', destroy_user_session_path %>
+                  <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
                 </li>
+              <% end %>
               </ul>
             </div>
           </nav>
