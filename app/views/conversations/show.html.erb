@@ -6,7 +6,7 @@
         <% @conversation.messages.each do |message| %>
           <li>
             <div class="alert alert-info" role="alert">
-              <b><%= @conversation.opposed_user(current_user).email %></b>: <%= message.body %>
+              <b><%= message.user.email %></b>: <%= message.body %>
             </div>
           </li>
 
