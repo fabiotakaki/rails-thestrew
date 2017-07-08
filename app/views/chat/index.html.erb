@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col">
+    <%= link_to 'New Chat', new_chat_path, class: 'btn btn-primary' %>
     <h1>Conversations</h1>
-    <div class="list-group">
+    <div class="list-group" id="conversations">
       <% @conversations.each do |conversation| %>
-        <%= link_to '<b>'.html_safe+conversation.opposed_user(current_user).email+'</b> | Last message: <b>'.html_safe+conversation.messages.last.user.email+'</b> '.html_safe+conversation.messages.last.body, conversation_path(conversation.id) %>
+        <%= link_to '<b>['.html_safe+current_user.role+'] '+conversation.opposed_user(current_user).email+'</b>'.html_safe, conversation_path(conversation.id), class: 'list-group-item list-group-item-action' %>
       <% end %>
     </div>
   </div>

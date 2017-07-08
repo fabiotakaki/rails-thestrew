@@ -5,4 +5,15 @@ class ConversationsController < ApplicationController
     @users = User.all.where.not(id: current_user)
     @message = Message.new
   end
+
+  def create
+    conversation = Conversation.new(conversation_params)
+    conversation.sender = current_user
+    message
+  end
+
+  private
+  def conversation_params
+    params.require(:conversation).permit(:recipient_id)
+  end
 end

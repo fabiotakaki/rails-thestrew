@@ -1,0 +1,6 @@
+<%= form_tag("/chat", method: "post") do %>
+  <%= label :body, 'Your message' %>:
+  <%= text_area_tag :body, '', {class: "form-control", placeholder: "Type your message.."} %>
+  <%= select_tag(:recipient_id, options_for_select(@users), class:"form-control") %>
+  <%= submit_tag "Send", class: "btn btn-primary", data: {send: "message"} %>
+<% end %>
