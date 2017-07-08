@@ -3,7 +3,7 @@
     <h1>Conversations</h1>
     <div class="list-group">
       <% @conversations.each do |conversation| %>
-        <%= link_to '<b>'.html_safe+conversation.opposed_user(current_user).email+'</b> '.html_safe+conversation.messages.last.body, conversation_path(conversation.id) %>
+        <%= link_to '<b>'.html_safe+conversation.opposed_user(current_user).email+'</b> | Last message: <b>'.html_safe+conversation.messages.last.user.email+'</b> '.html_safe+conversation.messages.last.body, conversation_path(conversation.id) %>
       <% end %>
     </div>
   </div>

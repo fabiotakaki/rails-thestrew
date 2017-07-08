@@ -2,18 +2,21 @@
 <html>
   <head>
     <title>Thestrew - Webpanel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= action_cable_meta_tag %>
+
   </head>
 
   <body>
     <div class="container">
       <div class="row">
         <div class="col">
-          <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+          <nav class="navbar navbar-toggleable-xs navbar-light bg-faded" style="background-color: #e3f2fd;">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
               <% if user_signed_in? %>
-                <li class="nav-item active">
+                <li class="nav-item">
                   Hello, <%= current_user.email %>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                   <%= link_to 'Chat', chat_index_path %>
                 </li>
                 <li class="nav-item">
