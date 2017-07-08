@@ -1,7 +1,11 @@
 class ChatController < ApplicationController
   def index
     @conversations = Conversation.where('sender_id=? OR recipient_id=?', current_user.id, current_user.id)
-    @message = Message.new
+    ids = []
+    @conversations.each do |conversation|
+      ids << conversation.message_ids
+    end
+    @messages = Message.order("created_at DESC").find(ids)
   end
 
   def new
@@ -34,6 +38,10 @@ class ChatController < ApplicationController
 
       message = Message.new({user: current_user, body: params[:body], conversation_id: conversation.id})
       if message.save
+        ActionCable.server.broadcast "home_messages_#{recipient.id}",
+          message: message.body,
+          user: message.user.email
+
         ActionCable.server.broadcast "messages_#{recipient.id}",
           message: message.body,
           user: message.user.email

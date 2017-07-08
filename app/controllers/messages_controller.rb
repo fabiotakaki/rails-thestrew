@@ -6,6 +6,11 @@ class MessagesController < ApplicationController
     conversation = Conversation.find(message_params[:conversation_id])
     message.conversation = conversation
     if message.save
+      ActionCable.server.broadcast "home_messages_#{conversation.recipient.id}",
+        message: message.body,
+        user: message.user.email
+      head :ok
+
       ActionCable.server.broadcast "messages_#{conversation.recipient.id}",
         message: message.body,
         user: message.user.email
